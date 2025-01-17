@@ -19,4 +19,5 @@ public class PortFolioController {
     public PortfolioDTO getPortfolio(@PathVariable Long portfolio_id) {
         return portFolioService.getPortfolio(portfolio_id);
     }
+   // create a method which will return list of portfolios belonging to a particular user
 }
