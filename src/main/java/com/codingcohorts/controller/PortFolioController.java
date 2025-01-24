@@ -23,7 +23,10 @@ public class PortFolioController {
    // create a method which will return list of portfolios belonging to a particular user
    // multiple portfolios can have same user id, because a single user can have multiple portfolios
    @GetMapping("/portfolios/user/{user_id}")
-   public List<PortfolioDTO> getAllPortfoliosByUserId(@PathVariable Long user_id) {
-       return portFolioService.getAllPortfoliosByUserId(user_id);
+   public List<PortfolioDTO> getAllPortfoliosByUserId(
+           @PathVariable("user_id")
+           Long userId)
+   {
+       return portFolioService.getAllPortfoliosByUserId(userId);
    }
 }

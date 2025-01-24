@@ -24,6 +24,12 @@ public class PortfolioService {
     }
 
     public List<PortfolioDTO> getAllPortfoliosByUserId(Long userId) {
+        if (userId == null) {
+            throw new IllegalArgumentException("User ID cannot be null");
+        }
+        if (userId <= 0) {
+            throw new IllegalArgumentException("User ID must be a positive number");
+        }
         List<Portfolio> portfolios = portFolioRepository.findByUserId(userId);
         if (portfolios.isEmpty()) {
             throw new ResourceNotFoundException("No portfolios found for user with id: " + userId);
