@@ -4,6 +4,7 @@ import com.codingcohorts.dto.PortfolioDTO;
 import com.codingcohorts.service.PortfolioService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -20,4 +21,12 @@ public class PortFolioController {
         return portFolioService.getPortfolio(portfolio_id);
     }
    // create a method which will return list of portfolios belonging to a particular user
+   // multiple portfolios can have same user id, because a single user can have multiple portfolios
+   @GetMapping("/portfolios/user/{user_id}")
+   public List<PortfolioDTO> getAllPortfoliosByUserId(
+           @PathVariable("user_id")
+           Long userId)
+   {
+       return portFolioService.getAllPortfoliosByUserId(userId);
+   }
 }
