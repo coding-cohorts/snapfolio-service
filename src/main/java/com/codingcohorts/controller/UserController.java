@@ -1,11 +1,12 @@
 package com.codingcohorts.controller;
 
+import com.codingcohorts.entity.User;
 import com.codingcohorts.dto.UserDTO;
+import com.codingcohorts.dto.CreateUserDTO;
 import com.codingcohorts.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 
 @RestController
@@ -21,5 +22,12 @@ public class UserController {
     @GetMapping("{user_id}")
     public UserDTO getUser(@PathVariable Long user_id) {
         return userService.getUserById(user_id);
+    }
+
+    // POST request to create a new user
+    @PostMapping
+    public ResponseEntity<UserDTO> createUser(@RequestBody CreateUserDTO createUserDTO) {
+        UserDTO savedUser = userService.createUser(createUserDTO);
+        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 }
