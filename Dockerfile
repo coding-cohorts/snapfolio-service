@@ -24,4 +24,4 @@ RUN ./gradlew bootJar --no-daemon
 EXPOSE 8080
 
 # Run the application
-CMD ["java", "-jar", "build/libs/SnapFolioApplication-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "build/libs/snapfolio-service-0.0.1-SNAPSHOT.jar"]
