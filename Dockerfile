@@ -1,5 +1,5 @@
 # Use an official OpenJDK runtime as a parent image
-FROM openjdk:23-jdk-alpine as build
+FROM amazoncorretto:23-alpine as build
 
 # Set the working directory in the container
 WORKDIR /app
@@ -21,7 +21,7 @@ COPY src /app/src
 RUN ./gradlew bootJar --no-daemon
 
 # Use a smaller base image for the final image
-FROM openjdk:23-jdk-alpine
+FROM amazoncorretto:23-alpine
 
 # Set the working directory in the container
 WORKDIR /app
