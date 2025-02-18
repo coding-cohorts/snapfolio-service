@@ -7,15 +7,19 @@ import com.codingcohorts.entity.User;
 import com.codingcohorts.exception.ResourceNotFoundException;
 import com.codingcohorts.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static java.util.stream.Collectors.toList;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
+        this.passwordEncoder = new BCryptPasswordEncoder(); // Initialize encoder
     }
 
     public UserDTO getUserById(Long id) {
@@ -31,7 +35,9 @@ public class UserService {
         User user = new User();
         user.setUsername(createUserDTO.username());
         user.setEmail(createUserDTO.email());
-        user.setPassword(createUserDTO.password());
+        // Hash the password before saving
+        String hashedPassword = passwordEncoder.encode(createUserDTO.password());
+        user.setPassword(hashedPassword);
         User savedUser = userRepository.save(user);
         return new UserDTO(savedUser.getId(), savedUser.getUsername(), savedUser.getEmail(), List.of());
     }
