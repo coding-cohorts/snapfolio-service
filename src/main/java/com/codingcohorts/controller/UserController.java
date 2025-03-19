@@ -1,6 +1,5 @@
 package com.codingcohorts.controller;
 
-import com.codingcohorts.entity.User;
 import com.codingcohorts.dto.UserDTO;
 import com.codingcohorts.dto.CreateUserDTO;
 import com.codingcohorts.service.UserService;
